@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Interface</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #chat-container {
+            width: 100%;
+            max-width: 600px;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Chatbot Interface</h1>
+        <p>Please type your message below to interact with the chatbot.</p>
+    </header>
+    <div id="chat-container">
+        <!-- Placeholder for Rasa Webchat widget -->
+        <div id="rasa-webchat"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@rasahq/rasa-webchat/lib/index.js"></script>
+    <script>
+        WebChat.default.init({
+            selector: "#rasa-webchat",
+            initPayload: "/get_started",
+            customData: {"language": "en"}, // arbitrary custom data
+            socketUrl: "http://localhost:5005",
+            title: "Chatbot",
+            subtitle: "Powered by Rasa"
+        });
+    </script>
+</body>
+</html>

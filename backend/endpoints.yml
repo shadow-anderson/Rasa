@@ -1,0 +1,17 @@
+action_endpoint:
+  url: "http://localhost:5055/webhook"
+
+tracker_store:
+  type: SQL
+  dialect: "sqlite"
+  db: "rasa.db"
+  host: null
+  port: null
+  username: null
+  password: null
+  query: null
+
+event_broker:
+  type: "pika"
+  url: "amqp://guest:guest@localhost:5672/"
+  queue: "rasa_events"

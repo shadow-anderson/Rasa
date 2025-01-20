@@ -1,0 +1,94 @@
+intents:
+  - greet
+  - goodbye
+  - check_availability
+  - book_appointment
+  - affirm
+  - deny
+  - inform
+  - fetch_clinics
+
+entities:
+  - date
+  - time
+  - doctor
+  - clinic_type
+  - location
+  - clinic_id
+  - patient_name
+
+slots:
+  date:
+    type: unfeaturized
+  time:
+    type: unfeaturized
+  doctor:
+    type: unfeaturized
+  clinic_type:
+    type: unfeaturized
+  location:
+    type: unfeaturized
+  clinic_id:
+    type: unfeaturized
+  patient_name:
+    type: unfeaturized
+  appointment_available:
+    type: bool
+  booking_id:
+    type: unfeaturized
+
+responses:
+  utter_greet:
+    - text: "Hello! How can I help you today?"
+  utter_goodbye:
+    - text: "Goodbye! Have a great day!"
+  utter_ask_date:
+    - text: "Please provide the date for the appointment."
+  utter_ask_time:
+    - text: "Please provide the time for the appointment."
+  utter_ask_doctor:
+    - text: "Please provide the doctor's name for the appointment."
+  utter_confirm_appointment:
+    - text: "Your appointment with Dr. {doctor} on {date} at {time} has been booked."
+  utter_no_availability:
+    - text: "Sorry, no appointments are available with Dr. {doctor} on {date} at {time}."
+  utter_ask_clinic_type:
+    - text: "Please provide the type of clinic you are looking for."
+  utter_ask_location:
+    - text: "Please provide the location you are looking for."
+  utter_ask_clinic_id:
+    - text: "Please provide the clinic ID."
+  utter_ask_patient_name:
+    - text: "Please provide your name."
+  utter_clinic_list:
+    - text: "Here are the {clinic_type} clinics in {location}:\n{clinic_list}"
+  utter_no_clinics_found:
+    - text: "Sorry, no {clinic_type} clinics found in {location}."
+
+actions:
+  - action_check_availability
+  - action_book_appointment
+  - action_fetch_clinics
+
+forms:
+  appointment_form:
+    required_slots:
+      date:
+        - type: from_entity
+          entity: date
+          intent: inform
+        - type: from_text
+      time:
+        - type: from_entity
+          entity: time
+          intent: inform
+        - type: from_text
+      doctor:
+        - type: from_entity
+          entity: doctor
+          intent: inform
+        - type: from_text
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
