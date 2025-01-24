@@ -1,0 +1,47 @@
+version: "2.0"
+
+nlu:
+  - intent: greet
+    examples: |
+      - Hello
+      - Hi
+      - Hey
+      - Good morning
+      - Good evening
+      - Hi there
+      - Hello there
+
+  - intent: book_appointment
+    examples: |
+      - I want to book an appointment for [toothache](problem) in [downtown](location) on [2023-10-10](date) at [10:00](time)
+      - Can I schedule an appointment for [back pain](problem) in [uptown](location) on [2023-11-15](date) at [14:00](time)?
+      - Book an appointment for [flu](problem) in [midtown](location) on [2023-12-01](date) at [09:00](time)
+      - I need an appointment for [headache](problem) in [suburbs](location) on [2023-10-20](date) at [11:00](time)
+      - Schedule an appointment for [fever](problem) in [city center](location) on [2023-11-05](date) at [16:00](time)
+
+  - intent: query_clinics
+    examples: |
+      - Can you recommend a clinic for [dental](problem) issues in [downtown](location)?
+      - I need a clinic for [skin rash](problem) in [uptown](location)
+      - Suggest clinics for [allergies](problem) in [midtown](location)
+      - Are there any clinics for [stomach ache](problem) in [suburbs](location)?
+      - Recommend a clinic for [eye infection](problem) in [city center](location)
+
+  - intent: provide_details
+    examples: |
+      - The location is [downtown](location)
+      - The date is [2023-10-10](date)
+      - The time is [10:00](time)
+      - I am experiencing [toothache](problem)
+      - The appointment should be in [uptown](location)
+      - I need it on [2023-11-15](date)
+      - The appointment time is [14:00](time)
+      - I have [back pain](problem)
+
+  - intent: problem_ivf
+    examples: |
+      - I am having issues with conception and need an appointment in [downtown](location) on [2023-10-10](date) at [10:00](time)
+      - Can I book a consultation for IVF problems in [uptown](location) on [2023-11-15](date) at [14:00](time)?
+      - I need help with conception issues and want to schedule an appointment in [midtown](location) on [2023-12-01](date) at [09:00](time)
+      - Schedule a consultation for IVF issues in [suburbs](location) on [2023-10-20](date) at [11:00](time)
+      - I need an appointment for conception problems in [city center](location) on [2023-11-05](date) at [16:00](time)

@@ -1,0 +1,91 @@
+version: "2.0"
+
+stories:
+  - story: Greet and query clinics
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: query_clinics
+      - action: utter_ask_clinic_type
+      - intent: inform
+        entities:
+          - clinic_type: "dental"
+      - action: utter_ask_location
+      - intent: inform
+        entities:
+          - location: "downtown"
+      - action: action_fetch_clinics
+      - action: utter_clinic_list
+
+  - story: Greet and book appointment
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: book_appointment
+      - action: appointment_form
+      - active_loop: appointment_form
+      - intent: inform
+        entities:
+          - date: "2023-10-10"
+      - action: slot{"date": "2023-10-10"}
+      - intent: inform
+        entities:
+          - time: "10:00"
+      - action: slot{"time": "10:00"}
+      - intent: inform
+        entities:
+          - doctor: "Smith"
+      - action: slot{"doctor": "Smith"}
+      - action: action_check_availability
+      - action: action_book_appointment
+      - action: utter_confirm_appointment
+
+  - story: Provide details and book appointment
+    steps:
+      - intent: provide_details
+      - action: appointment_form
+      - active_loop: appointment_form
+      - intent: inform
+        entities:
+          - problem: "toothache"
+      - action: slot{"problem": "toothache"}
+      - intent: inform
+        entities:
+          - date: "2023-10-12"
+      - action: slot{"date": "2023-10-12"}
+      - intent: inform
+        entities:
+          - time: "14:00"
+      - action: slot{"time": "14:00"}
+      - intent: inform
+        entities:
+          - doctor: "Jones"
+      - action: slot{"doctor": "Jones"}
+      - action: action_check_availability
+      - action: action_book_appointment
+      - action: utter_confirm_appointment
+  - story: Report conception issue and book appointment
+  steps:
+    - intent: problem_ivf
+    - action: utter_ask_problem_type
+    - slot_was_set:
+      - problem_type: "conception issue"
+    - action: utter_ask_location
+    - intent: inform
+      entities:
+        - location: "downtown"
+    - action: slot{"location": "downtown"}
+    - action: utter_ask_date
+    - intent: inform
+      entities:
+        - date: "2023-10-10"
+    - action: slot{"date": "2023-10-10"}
+    - action: utter_ask_time
+    - intent: inform
+      entities:
+        - time: "10:00"
+    - action: slot{"time": "10:00"}
+    - action: utter_confirm_preferences
+    - intent: affirm
+    - action: action_book_appointment
+    - action: utter_confirm_appointment

@@ -1,0 +1,31 @@
+version: "2.0"
+
+rules:
+  - rule: Greet the user
+    steps:
+      - intent: greet
+      - action: utter_greet
+
+  - rule: Ask for the user’s problem after greeting
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - action: utter_ask_problem
+
+  - rule: Collect missing slot information using forms
+    steps:
+      - intent: provide_details
+      - action: appointment_form
+      - active_loop: appointment_form
+
+  - rule: Recommend clinics based on collected information
+    steps:
+      - intent: query_clinics
+      - action: action_recommend_clinic
+
+  - rule: Confirm the appointment once all slots are filled
+    steps:
+      - intent: book_appointment
+      - action: action_check_availability
+      - action: action_book_appointment
+      - action: utter_confirm_appointment

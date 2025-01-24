@@ -41,15 +41,6 @@
         <div id="rasa-webchat"></div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@rasahq/rasa-webchat/lib/index.js"></script>
-    <script>
-        WebChat.default.init({
-            selector: "#rasa-webchat",
-            initPayload: "/get_started",
-            customData: {"language": "en"}, // arbitrary custom data
-            socketUrl: "http://localhost:5005",
-            title: "Chatbot",
-            subtitle: "Powered by Rasa"
-        });
-    </script>
+    <script src="rasa-webchat-config.js"></script>
 </body>
 </html>

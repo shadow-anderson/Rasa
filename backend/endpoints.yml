@@ -1,5 +1,6 @@
 action_endpoint:
-  url: "http://localhost:5055/webhook"
+  url: "http://localhost:8000/webhook"
+
 
 tracker_store:
   type: SQL

@@ -1,23 +1,22 @@
 intents:
   - greet
-  - goodbye
-  - check_availability
   - book_appointment
-  - affirm
-  - deny
+  - provide_details
+  - query_clinics
   - inform
-  - fetch_clinics
 
 entities:
+  - problem
+  - location
   - date
   - time
   - doctor
-  - clinic_type
-  - location
-  - clinic_id
-  - patient_name
 
 slots:
+  problem:
+    type: unfeaturized
+  location:
+    type: unfeaturized
   date:
     type: unfeaturized
   time:
@@ -25,8 +24,6 @@ slots:
   doctor:
     type: unfeaturized
   clinic_type:
-    type: unfeaturized
-  location:
     type: unfeaturized
   clinic_id:
     type: unfeaturized
@@ -64,7 +61,65 @@ responses:
     - text: "Here are the {clinic_type} clinics in {location}:\n{clinic_list}"
   utter_no_clinics_found:
     - text: "Sorry, no {clinic_type} clinics found in {location}."
+  utter_ask_problem:
+    - text: "Please describe the problem you are experiencing."
+  utter_fallback:
+    - text: "I'm sorry, I didn't understand that. Could you please rephrase?"
 
+
+slots:
+  problem_type:
+    type: text
+  location:
+    type: text
+  date:
+    type: text
+  time:
+    type: text
+
+responses:
+  utter_greet:
+    - text: "Hello! How can I help you today?"
+  utter_goodbye:
+    - text: "Goodbye! Have a great day!"
+  utter_ask_date:
+    - text: "Please provide the date for the appointment."
+  utter_ask_time:
+    - text: "Please provide the time for the appointment."
+  utter_ask_doctor:
+    - text: "Please provide the doctor's name for the appointment."
+  utter_confirm_appointment:
+    - text: "Your appointment with Dr. {doctor} on {date} at {time} has been booked."
+  utter_no_availability:
+    - text: "Sorry, no appointments are available with Dr. {doctor} on {date} at {time}."
+  utter_ask_clinic_type:
+    - text: "Please provide the type of clinic you are looking for."
+  utter_ask_location:
+    - text: "Please provide the location you are looking for."
+  utter_ask_clinic_id:
+    - text: "Please provide the clinic ID."
+  utter_ask_patient_name:
+    - text: "Please provide your name."
+  utter_clinic_list:
+    - text: "Here are the {clinic_type} clinics in {location}:\n{clinic_list}"
+  utter_no_clinics_found:
+    - text: "Sorry, no {clinic_type} clinics found in {location}."
+  utter_ask_problem:
+    - text: "Please describe the problem you are experiencing."
+  utter_fallback:
+    - text: "I'm sorry, I didn't understand that. Could you please rephrase?"
+  utter_ask_problem_type:
+    - text: "Please provide the type of problem you are experiencing."
+  utter_ask_location:
+    - text: "Please provide the location for the appointment."
+  utter_ask_date:
+    - text: "Please provide the date for the appointment."
+  utter_ask_time:
+    - text: "Please provide the time for the appointment."
+  utter_confirm_preferences:
+    - text: "You want to book an appointment for {problem_type} in {location} on {date} at {time}, correct?"
+
+    
 actions:
   - action_check_availability
   - action_book_appointment
@@ -73,6 +128,16 @@ actions:
 forms:
   appointment_form:
     required_slots:
+      problem:
+        - type: from_entity
+          entity: problem
+          intent: provide_details
+        - type: from_text
+      location:
+        - type: from_entity
+          entity: location
+          intent: query_clinics
+        - type: from_text
       date:
         - type: from_entity
           entity: date
@@ -81,11 +146,6 @@ forms:
       time:
         - type: from_entity
           entity: time
-          intent: inform
-        - type: from_text
-      doctor:
-        - type: from_entity
-          entity: doctor
           intent: inform
         - type: from_text
 
